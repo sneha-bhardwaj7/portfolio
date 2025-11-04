@@ -1,16 +1,28 @@
 "use client"
-// import snehaImage from "../assets/snehaImage.png"
-// Replace this with your actual image path
-import snehaImage from "../assets/snehaImage.png"
-
 import { useEffect, useState } from "react"
-import { FaGithub, FaLinkedin, FaEnvelope, FaReact, FaLaptopCode, FaAngleDoubleDown } from "react-icons/fa"
+import {
+  FaGithub,
+  FaLinkedin,
+  FaEnvelope,
+  FaReact,
+  FaLaptopCode,
+  FaDownload,
+} from "react-icons/fa"
+
+import snehaImage from "../assets/snehaImage.png"
+import snehaResumePdf from "../assets/snehaResume.pdf"
 
 const Hero = () => {
   const [displayText, setDisplayText] = useState("")
   const [currentIndex, setCurrentIndex] = useState(0)
-  const titles = ["Frontend-Backend Integrator", "Mern stack developer", "AWS DevOps Specialist", "Web Designer"]
+  const titles = [
+    "Frontend-Backend Integrator",
+    "MERN Stack Developer",
+    "AWS DevOps Specialist",
+    "Web Designer",
+  ]
 
+  // Typing animation logic
   useEffect(() => {
     const currentTitle = titles[currentIndex]
     let charIndex = 0
@@ -26,7 +38,7 @@ const Hero = () => {
           setDisplayText("")
         }, 2000)
       }
-    }, 100)
+    }, 80) // slightly faster for smoother feel
 
     return () => clearInterval(typeInterval)
   }, [currentIndex])
@@ -37,6 +49,16 @@ const Hero = () => {
 
   const scrollToProjects = () => {
     document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })
+  }
+
+  const handleDownloadResume = () => {
+    const resumeUrl = snehaResumePdf
+    const link = document.createElement("a")
+    link.href = resumeUrl
+    link.setAttribute("download", "Sneha_Bhardwaj_Resume.pdf")
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
   }
 
   return (
@@ -62,10 +84,16 @@ const Hero = () => {
           {/* Content */}
           <div className="flex-1 text-center lg:text-left slide-in-left">
             <div className="mb-6">
-              <p className="text-purple-400 text-lg mb-2 slide-in-up" style={{ animationDelay: "0.2s" }}>
+              <p
+                className="text-purple-400 text-lg mb-2 slide-in-up"
+                style={{ animationDelay: "0.2s" }}
+              >
                 Hello, I'm
               </p>
-              <h1 className="text-5xl lg:text-7xl font-bold mb-4 slide-in-up" style={{ animationDelay: "0.4s" }}>
+              <h1
+                className="text-5xl lg:text-7xl font-bold mb-4 slide-in-up"
+                style={{ animationDelay: "0.4s" }}
+              >
                 <span className="gradient-text">Sneha</span>
                 <br />
                 <span className="text-white">Bhardwaj</span>
@@ -76,23 +104,32 @@ const Hero = () => {
                   style={{ animationDelay: "0.6s" }}
                 >
                   {displayText}
-                  <span className="animate-pulse">|</span>
+                  {displayText && <span className="animate-pulse">|</span>}
                 </h2>
               </div>
             </div>
 
-            <p className="text-xl text-gray-400 mb-8 max-w-2xl slide-in-up" style={{ animationDelay: "0.8s" }}>
-              Passionate about creating beautiful, responsive, and user-friendly web applications. I specialize in
-              React.js and modern frontend technologies to bring designs to life.
+            <p
+              className="text-xl text-gray-400 mb-8 max-w-2xl slide-in-up"
+              style={{ animationDelay: "0.8s" }}
+            >
+              Passionate about creating beautiful, responsive, and
+              user-friendly web applications. I specialize in React.js and
+              modern frontend technologies to bring designs to life.
             </p>
 
             <div
               className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start slide-in-up"
               style={{ animationDelay: "1s" }}
             >
-              <button onClick={scrollToProjects} className="btn-primary px-8 py-4 text-lg font-semibold hover-lift">
-                View My Work
+              <button
+                onClick={handleDownloadResume}
+                className="btn-primary px-6 py-3 hover-lift flex items-center space-x-2"
+              >
+                <FaDownload className="text-white" />
+                <span>Download Resume</span>
               </button>
+
               <button
                 onClick={scrollToContact}
                 className="px-8 py-4 text-lg font-semibold border-2 border-purple-500 text-purple-400 hover:bg-purple-500 hover:text-white transition-all duration-300 rounded-lg hover-lift"
@@ -109,7 +146,6 @@ const Hero = () => {
               <a
                 href="https://github.com/sneha-bhardwaj7"
                 className="w-12 h-12 bg-gray-800 hover:bg-purple-600 rounded-full flex items-center justify-center transition-all duration-300 hover-lift glow-effect"
-                style={{ animationDelay: "1.4s" }}
                 aria-label="GitHub Profile"
               >
                 <FaGithub className="text-xl text-white" />
@@ -117,7 +153,6 @@ const Hero = () => {
               <a
                 href="https://www.linkedin.com/in/sneha-bhardwaj-764b38290/"
                 className="w-12 h-12 bg-gray-800 hover:bg-purple-600 rounded-full flex items-center justify-center transition-all duration-300 hover-lift glow-effect"
-                style={{ animationDelay: "1.5s" }}
                 aria-label="LinkedIn Profile"
               >
                 <FaLinkedin className="text-xl text-white" />
@@ -125,7 +160,6 @@ const Hero = () => {
               <a
                 href="mailto:snehabhardwaj083@gmail.com"
                 className="w-12 h-12 bg-gray-800 hover:bg-purple-600 rounded-full flex items-center justify-center transition-all duration-300 hover-lift glow-effect"
-                style={{ animationDelay: "1.6s" }}
                 aria-label="Email Me"
               >
                 <FaEnvelope className="text-xl text-white" />
@@ -144,6 +178,7 @@ const Hero = () => {
                   className="w-full h-full object-cover"
                 />
               </div>
+
               {/* Floating Elements */}
               <div className="absolute -top-4 -right-4 w-20 h-20 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center floating-element glow-effect">
                 <FaReact className="text-4xl text-white" />

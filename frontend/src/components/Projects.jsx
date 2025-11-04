@@ -1,54 +1,69 @@
 "use client"
-
+import pharmaImage from "../assets/pharmaImage.png"
+import petCare from "../assets/petCare.png"
+import branding from "../assets/branding.png"
 import { useState } from "react"
 
 const Projects = () => {
   const [activeProject, setActiveProject] = useState(0)
 
-  const projects = [
-    {
-      id: 1,
-      name: "Pet Care Platform",
-      description:
-        "A comprehensive web application for pet care management with user authentication, appointment booking, and pet health tracking features.",
-      role: "Frontend Developer",
-      technologies: ["React.js", "Tailwind CSS", "Node.js", "MongoDB", "Express.js"],
-      image: "/modern-pet-care-dashboard-interface.jpg",
-      liveDemo: "https://petcare-demo.com",
-      github: "https://github.com/sneha/pet-care-platform",
-      features: [
-        "User authentication and profiles",
-        "Pet health tracking dashboard",
-        "Appointment booking system",
-        "Responsive design for all devices",
-        "Real-time notifications",
-      ],
-      color: "from-purple-500 to-pink-500",
-    },
-    {
-      id: 2,
-      name: "BrandBooster",
-      description:
-        "A marketing analytics dashboard that helps businesses track their brand performance across multiple platforms with real-time data visualization.",
-      role: "Full-Stack Developer",
-      technologies: ["React.js", "Chart.js", "Node.js", "Express.js", "SQL"],
-      image: "/marketing-dashboard-analytics.png",
-      liveDemo: "https://brandbooster-demo.com",
-      github: "https://github.com/sneha/brandbooster",
-      features: [
-        "Real-time analytics dashboard",
-        "Multi-platform data integration",
-        "Interactive charts and graphs",
-        "Custom reporting system",
-        "Performance optimization",
-      ],
-      color: "from-blue-500 to-cyan-500",
-    },
-    
-  ]
+const projects = [
+    {
+      id: 1,
+      name: "Smart Pharmacy Management", // PROJECT 1: From Resume
+      description:
+        "A full-stack pharmacy management platform designed using the MERN stack with a comprehensive admin dashboard and features for automated medicine tracking, billing, and prescription validation.",
+      role: "Full-Stack Developer",
+      technologies: ["React.js", "Tailwind CSS", "Node.js", "Express.js", "MongoDB", "Firedbase/Auth", "OpenAI API", "Nodemailer"],
+      image: pharmaImage,
+      liveDemo: "#", // Placeholder
+      github: "https://github.com/sneha-bhardwaj7/PharmaCare", // Placeholder
+      features: [
+        "Admin dashboard for inventory management (500+ medicines with automated low-stock/expiry alerts).",
+        "Prescription validation, PoS billing system, and customer portal for medicine search.",
+        "Implemented advanced features including Firebase Authentication for multi-role access control.",
+        "GPS-based medicine locator for 15-minute availability (Redux).",
+      ],
+      color: "from-green-500 to-teal-500",
+    },
+    {
+      id: 2,
+      name: "Pet Care Platform", // PROJECT 2: From Resume (Updated content)
+      description:
+        "A robust, full-stack e-commerce and scheduling platform dedicated to pet owners, product e-commerce, and a unique pet workout scheduler.",
+      role: "Full-Stack Developer",
+      technologies: ["React.js", "Tailwind CSS", "Node.js", "Express.js", "MongoDB", "Cloudinary"],
+      image: petCare,
+      liveDemo: "#", // Placeholder
+      github: "https://github.com/sneha-bhardwaj7/pet_care", // Placeholder
+      features: [
+        "Designed and built an all-in-one digital platform for pet owners.",
+        "Integrated e-commerce functionality with a community forum and a pet-specific scheduling tool.",
+        "Implemented a unique pet workout scheduler and Used Cloudinary for efficient media management.",
+      ],
+      color: "from-purple-500 to-pink-500",
+    },
+    {
+      id: 3,
+      name: "BrandBooster", // Keeping the original placeholder for balance/future use
+      description:
+        "A marketing analytics dashboard that helps businesses track their brand performance across multiple platforms with real-time data visualization.",
+      role: "Full-Stack Developer",
+      technologies: ["React.js", "Chart.js", "Node.js", "Express.js", "SQL"],
+      image: branding,
+      liveDemo: "https://brandbooster-demo.com",
+      github: "https://github.com/sneha-bhardwaj7/marketing_agency",
+      features: [
+        "Real-time analytics dashboard and Multi-platform data integration",
+        "Interactive charts and graphs and Custom reporting system",
+        "Performance optimization",
+      ],
+      color: "from-blue-500 to-cyan-500",
+    },
+  ]
 
   return (
-    <section id="projects" className="py-20 bg-gradient-to-br from-gray-900 to-gray-800 relative overflow-hidden">
+    <section id="projects" className="py-10 bg-gradient-to-br from-gray-900 to-gray-800 relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl floating-element"></div>
@@ -89,7 +104,7 @@ const Projects = () => {
         </div>
 
         {/* Active Project */}
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           {projects.map((project, index) => (
             <div
               key={project.id}
@@ -115,25 +130,27 @@ const Projects = () => {
                       <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300">
                         <div className="absolute bottom-4 left-4 right-4">
                           <div className="flex space-x-3">
-                            <a
-                              href={project.liveDemo}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="btn-primary px-4 py-2 text-sm"
-                            >
-                              Live Demo
-                            </a>
-                            <a
-                              href={project.github}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="px-4 py-2 text-sm border border-purple-500 text-purple-400 hover:bg-purple-500 hover:text-white transition-all duration-300 rounded-lg"
-                            >
-                              GitHub
-                            </a>
+                            
                           </div>
                         </div>
+
+                        
                       </div>
+
+                      <div>
+                      <h4 className="text-xl font-semibold m-3 text-pink-400">Technologies Used</h4>
+                      <div className="flex flex-wrap gap-2">
+                        {project.technologies.map((tech, techIndex) => (
+                          <span
+                            key={tech}
+                            className={`px-3 py-1 mb-3 ml-1 bg-gradient-to-r ${project.color} bg-opacity-20 border border-purple-500/30 rounded-full text-sm text-gray-300 hover:bg-opacity-30 transition-all duration-300 scale-in`}
+                            style={{ animationDelay: `${techIndex * 0.1}s` }}
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
                     </div>
                   </div>
                 </div>
@@ -148,20 +165,7 @@ const Projects = () => {
                     </div>
 
                     {/* Technologies */}
-                    <div>
-                      <h4 className="text-xl font-semibold mb-3 text-pink-400">Technologies Used</h4>
-                      <div className="flex flex-wrap gap-2">
-                        {project.technologies.map((tech, techIndex) => (
-                          <span
-                            key={tech}
-                            className={`px-3 py-1 bg-gradient-to-r ${project.color} bg-opacity-20 border border-purple-500/30 rounded-full text-sm text-gray-300 hover:bg-opacity-30 transition-all duration-300 scale-in`}
-                            style={{ animationDelay: `${techIndex * 0.1}s` }}
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
+                    {/*  */}
 
                     {/* Features */}
                     <div>

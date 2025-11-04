@@ -1,6 +1,8 @@
 "use client"
 
 import { useState } from "react"
+import { HiMail, HiOutlineDeviceMobile, HiOutlineDownload } from "react-icons/hi"
+import { FaLinkedinIn, FaGithub, FaTwitter, FaInstagram, FaPaperPlane } from "react-icons/fa"
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -12,6 +14,55 @@ const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState("")
 
+  const contactInfo = [
+    {
+      icon: HiMail,
+      label: "Email",
+      value: "snehabhardwaj083@gmail.com",
+      link: "mailto:snehabhardwaj083@gmail.com",
+      color: "from-purple-500 to-pink-500",
+    },
+    {
+      icon: HiOutlineDeviceMobile,
+      label: "Phone",
+      value: "+91 72095 47221",
+      link: "tel:+917209547221",
+      color: "from-blue-500 to-cyan-500",
+    },
+    {
+      icon: FaLinkedinIn,
+      label: "LinkedIn",
+      value: "linkedin.com/in/sneha-bhardwaj-764b38290",
+      link: "http://www.linkedin.com/in/sneha-bhardwaj-764b38290/",
+      color: "from-green-500 to-teal-500",
+    },
+    {
+      icon: FaGithub,
+      label: "GitHub",
+      value: "github.com/sneha-bhardwaj7",
+      link: "https://github.com/sneha-bhardwaj7",
+      color: "from-orange-500 to-red-500",
+    },
+  ]
+
+  const socialLinks = [
+    { name: "GitHub", icon: FaGithub, url: "https://github.com/sneha-bhardwaj" },
+    { name: "LinkedIn", icon: FaLinkedinIn, url: "https://linkedin.com/in/sneha-bhardwaj-764b38290" },
+    { name: "Twitter", icon: FaTwitter, url: "https://twitter.com/sneha_dev" },
+    { name: "Instagram", icon: FaInstagram, url: "https://instagram.com/sneha.codes" },
+  ]
+  
+  const resumePublicPath = "/snehaResume.pdf"
+  
+  const handleDownloadResume = () => {
+    const link = document.createElement("a")
+    link.href = `${resumePublicPath}?v=${new Date().getTime()}`
+    link.setAttribute("download", "Sneha_Bhardwaj_Resume.pdf")
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+  }
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -22,60 +73,39 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setIsSubmitting(true)
+    setSubmitStatus("")
 
-    // Simulate form submission
-    setTimeout(() => {
+    try {
+      const response = await fetch('http://localhost:5000/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+
+      const data = await response.json()
+
+      if (response.ok) {
+        setSubmitStatus("success")
+        setFormData({ name: "", email: "", subject: "", message: "" })
+      } else {
+        console.error("Form submission failed:", data)
+        setSubmitStatus("error")
+      }
+    } catch (error) {
+      console.error("Network error during form submission:", error)
+      setSubmitStatus("error")
+    } finally {
       setIsSubmitting(false)
-      setSubmitStatus("success")
-      setFormData({ name: "", email: "", subject: "", message: "" })
-
       setTimeout(() => {
         setSubmitStatus("")
-      }, 3000)
-    }, 2000)
+      }, 5000)
+    }
   }
-
-  const contactInfo = [
-    {
-      icon: "📧",
-      label: "Email",
-      value: "sneha.bhardwaj@example.com",
-      link: "mailto:sneha.bhardwaj@example.com",
-      color: "from-purple-500 to-pink-500",
-    },
-    {
-      icon: "📱",
-      label: "Phone",
-      value: "+91 98765 43210",
-      link: "tel:+919876543210",
-      color: "from-blue-500 to-cyan-500",
-    },
-    {
-      icon: "💼",
-      label: "LinkedIn",
-      value: "linkedin.com/in/sneha-bhardwaj-764b38290/",
-      link: "http://www.linkedin.com/in/sneha-bhardwaj-764b38290/",
-      color: "from-green-500 to-teal-500",
-    },
-    {
-      icon: "🔗",
-      label: "GitHub",
-      value: "github.com/sneha-bhardwaj",
-      link: "https://github.com/sneha-bhardwaj",
-      color: "from-orange-500 to-red-500",
-    },
-  ]
-
-  const socialLinks = [
-    { name: "GitHub", icon: "🔗", url: "https://github.com/sneha-bhardwaj" },
-    { name: "LinkedIn", icon: "💼", url: "https://linkedin.com/in/sneha-bhardwaj" },
-    { name: "Twitter", icon: "🐦", url: "https://twitter.com/sneha_dev" },
-    { name: "Instagram", icon: "📷", url: "https://instagram.com/sneha.codes" },
-  ]
 
   return (
     <section id="contact" className="py-20 bg-gradient-to-br from-gray-800 to-gray-900 relative overflow-hidden">
-      {/* Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl floating-element"></div>
         <div
@@ -97,7 +127,6 @@ const Contact = () => {
 
         <div className="max-w-6xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12">
-            {/* Contact Information */}
             <div className="slide-in-left">
               <div className="space-y-8">
                 <div>
@@ -108,19 +137,20 @@ const Contact = () => {
                   </p>
                 </div>
 
-                {/* Contact Details */}
                 <div className="space-y-4">
                   {contactInfo.map((contact, index) => (
                     <a
                       key={contact.label}
                       href={contact.link}
+                      target={contact.label !== 'Email' && contact.label !== 'Phone' ? "_blank" : "_self"}
+                      rel="noopener noreferrer"
                       className="flex items-center space-x-4 p-4 bg-gray-800/50 rounded-lg hover:bg-gray-700/50 transition-all duration-300 hover-lift scale-in"
                       style={{ animationDelay: `${index * 0.1}s` }}
                     >
                       <div
                         className={`w-12 h-12 bg-gradient-to-r ${contact.color} rounded-lg flex items-center justify-center floating-element`}
                       >
-                        <span className="text-xl">{contact.icon}</span>
+                        <contact.icon className="text-xl text-white" />
                       </div>
                       <div>
                         <h4 className="font-semibold text-white">{contact.label}</h4>
@@ -130,43 +160,24 @@ const Contact = () => {
                   ))}
                 </div>
 
-                {/* Social Links */}
-                <div className="pt-8">
-                  <h4 className="text-xl font-semibold mb-4 gradient-text">Follow Me</h4>
-                  <div className="flex space-x-4">
-                    {socialLinks.map((social, index) => (
-                      <a
-                        key={social.name}
-                        href={social.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-12 h-12 bg-gray-800 hover:bg-purple-600 rounded-full flex items-center justify-center transition-all duration-300 hover-lift glow-effect bounce-in"
-                        style={{ animationDelay: `${index * 0.1}s` }}
-                      >
-                        <span className="text-xl">{social.icon}</span>
-                      </a>
-                    ))}
-                  </div>
-                </div>
+                
 
-                {/* Download Resume */}
-                <div className="pt-8">
-                  <button className="btn-primary px-8 py-4 text-lg font-semibold hover-lift flex items-center space-x-2">
-                    <span>📄</span>
-                    <span>Download Resume</span>
-                  </button>
-                </div>
+                
               </div>
             </div>
 
-            {/* Contact Form */}
             <div className="slide-in-right">
               <div className="card hover-lift">
                 <h3 className="text-2xl font-bold mb-6 gradient-text">Send Message</h3>
 
                 {submitStatus === "success" && (
                   <div className="mb-6 p-4 bg-green-500/20 border border-green-500/30 rounded-lg text-green-400 slide-in-up">
-                    ✅ Message sent successfully! I'll get back to you soon.
+                    <FaPaperPlane className="inline mr-2" /> Message sent successfully! I'll get back to you soon.
+                  </div>
+                )}
+                {submitStatus === "error" && (
+                  <div className="mb-6 p-4 bg-red-500/20 border border-red-500/30 rounded-lg text-red-400 slide-in-up">
+                    ⚠️ Submission failed. Please try again or contact me directly via email.
                   </div>
                 )}
 
@@ -248,7 +259,7 @@ const Contact = () => {
                       </>
                     ) : (
                       <>
-                        <span>🚀</span>
+                        <FaPaperPlane className="text-xl" />
                         <span>Send Message</span>
                       </>
                     )}
@@ -259,7 +270,6 @@ const Contact = () => {
           </div>
         </div>
 
-        {/* Call to Action */}
         <div className="mt-20 text-center slide-in-up">
           <div className="card max-w-3xl mx-auto">
             <h3 className="text-2xl font-bold mb-4 gradient-text">Ready to Start Your Project?</h3>
@@ -268,10 +278,20 @@ const Contact = () => {
               together!
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="btn-primary px-8 py-3 hover-lift">Start a Project</button>
-              <button className="px-8 py-3 border-2 border-purple-500 text-purple-400 hover:bg-purple-500 hover:text-white transition-all duration-300 rounded-lg hover-lift">
-                Schedule a Call
+              <button 
+                onClick={() => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })}
+                className="btn-primary px-8 py-3 hover-lift"
+              >
+                Start a Project
               </button>
+              <a 
+                href="https://calendly.com/your-username" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-8 py-3 border-2 border-purple-500 text-purple-400 hover:bg-purple-500 hover:text-white transition-all duration-300 rounded-lg hover-lift inline-flex items-center justify-center"
+              >
+                Schedule a Call
+              </a>
             </div>
           </div>
         </div>
@@ -281,4 +301,3 @@ const Contact = () => {
 }
 
 export default Contact
-
