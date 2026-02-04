@@ -16,10 +16,10 @@ const Hero = () => {
   const [displayText, setDisplayText] = useState("")
   const [currentIndex, setCurrentIndex] = useState(0)
   const titles = [
-    "Frontend-Backend Integrator",
     "MERN Stack Developer",
-    "AWS DevOps Specialist",
-    "Web Designer",
+    "Problem Solving",
+    "AI Orchestration",
+    "Team Collaboration",
   ]
 
   // Typing animation logic
@@ -113,9 +113,8 @@ const Hero = () => {
               className="text-xl text-gray-400 mb-8 max-w-2xl slide-in-up"
               style={{ animationDelay: "0.8s" }}
             >
-              Passionate about creating beautiful, responsive, and
-              user-friendly web applications. I specialize in React.js and
-              modern frontend technologies to bring designs to life.
+              A MERN Stack Developer with internship experience at Swarajya Digital, working on real-world web applications
+               and user-centric interfaces. Experienced in integrating AI features into projects, and actively contributing as a Core Team Member at GDG.
             </p>
 
             <div

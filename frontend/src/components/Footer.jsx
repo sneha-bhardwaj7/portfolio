@@ -16,8 +16,6 @@ const Footer = () => {
   const socialLinks = [
     { name: "GitHub", icon: FaGithub, url: "https://github.com/sneha-bhardwaj7" },
     { name: "LinkedIn", icon: FaLinkedinIn, url: "https://www.linkedin.com/in/sneha-bhardwaj-764b38290/" },
-    { name: "Twitter", icon: FaTwitter, url: "https://twitter.com/sneha_dev" },
-    { name: "Instagram", icon: FaInstagram, url: "https://instagram.com/sneha.codes" },
     { name: "Email", icon: HiMail, url: "snehabhardwaj083@gmail.com" },
   ]
 

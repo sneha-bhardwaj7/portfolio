@@ -17,7 +17,7 @@ const projects = [
       role: "Full-Stack Developer",
       technologies: ["React.js", "Tailwind CSS", "Node.js", "Express.js", "MongoDB", "Firedbase/Auth", "OpenAI API", "Nodemailer"],
       image: pharmaImage,
-      liveDemo: "#", // Placeholder
+      liveDemo: "https://pharma-care-2077.vercel.app/AuthPage", // Placeholder
       github: "https://github.com/sneha-bhardwaj7/PharmaCare", // Placeholder
       features: [
         "Admin dashboard for inventory management (500+ medicines with automated low-stock/expiry alerts).",
@@ -232,10 +232,10 @@ const projects = [
         {/* Project Stats */}
         <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6 slide-in-up">
           {[
-            { number: "15+", label: "Projects Completed", icon: "🚀" },
-            { number: "2+", label: "Years Experience", icon: "⏰" },
-            { number: "100%", label: "Client Satisfaction", icon: "⭐" },
-            { number: "5+", label: "Technologies", icon: "💻" },
+             { number: "10+", label: "Projects Built", icon: "🚀" },
+  { number: "3+", label: "Major Projects", icon: "⏰" },
+  { number: "MERN", label: "Full-Stack", icon: "⭐" },
+  { number: "AI", label: "Integrations", icon: "💻" },
           ].map((stat, index) => (
             <div
               key={stat.label}

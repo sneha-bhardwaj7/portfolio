@@ -2,12 +2,13 @@ import { FaRocket, FaBriefcase, FaCode, FaStar, FaMapMarkerAlt, FaCalendarAlt, F
 import { RiStackFill } from "react-icons/ri" // Using RiStackFill for Technologies as FaCode is used elsewhere
 
 const About = () => {
-  const stats = [
-    { number: "2+", label: "Years Experience", icon: <FaRocket /> }, // Replaced "🚀"
-    { number: "15+", label: "Projects Completed", icon: <FaBriefcase /> }, // Replaced "💼"
-    { number: "5+", label: "Technologies", icon: <RiStackFill /> }, // Replaced "⚡"
-    { number: "100%", label: "Client Satisfaction", icon: <FaStar /> }, // Replaced "⭐"
-  ]
+ const stats = [
+  { number: "1+", label: "Internship Completed", icon: <FaRocket /> },
+  { number: "10+", label: "Real Projects", icon: <FaBriefcase /> },
+  { number: "8+", label: "Tech Stack", icon: <RiStackFill /> },
+  { number: "AI+", label: "AI Workflows", icon: <FaStar /> },
+];
+
 
   return (
     <section id="about" className="py-20 bg-gradient-to-br from-gray-900 to-gray-800 relative overflow-hidden">
@@ -29,37 +30,38 @@ const About = () => {
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Content */}
-          <div className="slide-in-left">
-            <div className="space-y-6">
-              <div className="card hover-lift">
-                <h3 className="text-2xl font-semibold mb-4 gradient-text">Frontend Developer & UI Enthusiast</h3>
-                <p className="text-gray-300 text-lg leading-relaxed">
-                  I'm a passionate frontend developer with a keen eye for design and user experience. I love creating
-                  beautiful, responsive, and interactive web applications that provide exceptional user experiences.
-                </p>
-              </div>
+          {/* Content */}<div className="slide-in-left">
+  <div className="space-y-6">
+    <div className="card hover-lift">
+      <h3 className="text-2xl font-semibold mb-4 gradient-text">
+        MERN Stack Developer & AI Workflow Enthusiast
+      </h3>
+      <p className="text-gray-300 text-lg leading-relaxed">
+        I build scalable, responsive web applications using the MERN stack, combining clean frontend experiences with
+        robust backend systems. I enjoy turning complex ideas into reliable, user-friendly products.
+      </p>
+    </div>
 
-              <div className="card hover-lift">
-                <h4 className="text-xl font-semibold mb-3 text-purple-400">What I Do</h4>
-                <p className="text-gray-300 leading-relaxed">
-                  I specialize in building modern web applications using React.js, crafting pixel-perfect user
-                  interfaces with Tailwind CSS, and ensuring optimal performance across all devices. My goal is to
-                  bridge the gap between design and functionality.
-                </p>
-              </div>
+    <div className="card hover-lift">
+      <h4 className="text-xl font-semibold mb-3 text-purple-400">What I Do</h4>
+      <p className="text-gray-300 leading-relaxed">
+        I develop full-stack applications using React.js, Tailwind CSS, Node.js, Express, and REST APIs. I work with
+        databases like MongoDB and MySQL, implement secure authentication using JWT, and manage cloud resources on AWS
+        (S3, EC2, IAM). I also build real-time features using WebSockets.
+      </p>
+    </div>
 
-              <div className="card hover-lift">
-                <h4 className="text-xl font-semibold mb-3 text-pink-400">My Passion</h4>
-                <p className="text-gray-300 leading-relaxed">
-                  I'm constantly learning new technologies and staying up-to-date with the latest trends in web
-                  development. I believe in writing clean, maintainable code and creating applications that users love
-                  to interact with.
-                </p>
-              </div>
-            </div>
-          </div>
+    <div className="card hover-lift">
+      <h4 className="text-xl font-semibold mb-3 text-pink-400">AI & Automation</h4>
+      <p className="text-gray-300 leading-relaxed">
+        I integrate AI-powered features using LangChain, LangGraph, and OpenAI APIs, and automate workflows using n8n.
+        My focus is on building intelligent systems that enhance user experience and streamline real-world processes.
+      </p>
+    </div>
+  </div>
+</div>
 
+          
           {/* Stats */}
           <div className="slide-in-right">
             <div className="grid grid-cols-2 gap-6">

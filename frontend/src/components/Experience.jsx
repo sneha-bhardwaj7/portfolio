@@ -1,54 +1,62 @@
+import { 
+  FaBriefcase, 
+  FaUsers, 
+  FaCalendarAlt, 
+  FaMapMarkerAlt, 
+  FaStar 
+} from "react-icons/fa";
+
 const Experience = () => {
   const experiences = [
     {
       id: 1,
       company: "Swarajya Digital",
-      role: "Frontend Developer Intern",
-      duration: "June 2024 - Present",
+      role: "Software Developer Intern (Paid)",
+      duration: "June 2024 - Aug 2024",
       location: "Remote",
       type: "Internship",
       responsibilities: [
-        "Designed and developed responsive website layouts using React.js and Tailwind CSS",
-        "Collaborated with design team to implement pixel-perfect UI components",
-        "Optimized website performance and improved loading speeds by 40%",
-        "Participated in code reviews and maintained coding standards",
-        "Worked on multiple client projects simultaneously",
+        "Built responsive user interfaces using React.js and Tailwind CSS",
+        "Integrated frontend components with backend APIs",
+        "Worked on real-world client projects in a collaborative team environment",
+        "Fixed UI bugs and improved usability across multiple screens",
+        "Followed best practices for clean and maintainable frontend code",
       ],
       accomplishments: [
-        "Successfully delivered 8+ website layouts within tight deadlines",
-        "Improved user engagement by 25% through enhanced UI/UX design",
-        "Mentored 2 junior developers in React.js best practices",
-        "Implemented responsive design patterns across all projects",
+        "Delivered production-ready UI features for live client projects",
+        "Improved page responsiveness and cross-device compatibility",
+        "Gained hands-on experience with real-world development workflows",
+        "Enhanced overall user experience through iterative UI improvements",
       ],
       technologies: ["React.js", "Tailwind CSS", "JavaScript", "HTML5", "CSS3", "Git"],
       color: "from-purple-500 to-pink-500",
-      icon: "💼",
+      icon: FaBriefcase,
     },
     {
       id: 2,
-      company: "Tech Events Coordinator",
-      role: "Technical Event Coordinator",
-      duration: "January 2024 - May 2024",
+      company: "Google Developer Group (GDG)",
+      role: "Core Team Member",
+      duration: "2024 - Present",
       location: "University",
-      type: "Leadership",
+      type: "Community",
       responsibilities: [
-        "Coordinated multiple technical events and workshops for 500+ students",
-        "Managed event logistics, speaker coordination, and technical setup",
-        "Led a team of 15 volunteers for successful event execution",
-        "Developed event websites and registration systems",
-        "Handled budget management and vendor negotiations",
+        "Organized and coordinated technical events, workshops, and sessions",
+        "Assisted in planning developer-focused learning initiatives",
+        "Collaborated with team members to manage event logistics and outreach",
+        "Helped onboard students and promote tech awareness on campus",
+        "Supported speakers and managed event execution workflows",
       ],
       accomplishments: [
-        "Successfully organized 5 major technical events with 95% satisfaction rate",
-        "Increased event attendance by 60% through effective marketing strategies",
-        "Established partnerships with 10+ tech companies for sponsorships",
-        "Created reusable event management templates for future coordinators",
+        "Contributed to the successful execution of multiple GDG events",
+        "Helped engage and onboard new students into the developer community",
+        "Improved event coordination processes through structured planning",
+        "Strengthened leadership and communication skills through teamwork",
       ],
-      technologies: ["Event Management", "Team Leadership", "Project Management", "Communication"],
+      technologies: ["Event Management", "Team Coordination", "Community Building", "Communication"],
       color: "from-blue-500 to-cyan-500",
-      icon: "🎯",
+      icon: FaUsers,
     },
-  ]
+  ];
 
   return (
     <section id="experience" className="py-20 bg-gradient-to-br from-gray-800 to-gray-900 relative overflow-hidden">
@@ -75,124 +83,108 @@ const Experience = () => {
         <div className="max-w-4xl mx-auto">
           {/* Timeline */}
           <div className="relative">
-            {/* Timeline Line */}
             <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-purple-500 to-pink-500"></div>
 
-            {experiences.map((experience, index) => (
-              <div
-                key={experience.id}
-                className={`relative mb-12 ${index % 2 === 0 ? "slide-in-left" : "slide-in-right"}`}
-                style={{ animationDelay: `${index * 0.3}s` }}
-              >
-                {/* Timeline Dot */}
+            {experiences.map((experience, index) => {
+              const Icon = experience.icon;
+              return (
                 <div
-                  className={`absolute left-6 w-4 h-4 bg-gradient-to-r ${experience.color} rounded-full border-4 border-gray-900 glow-effect`}
-                ></div>
+                  key={experience.id}
+                  className={`relative mb-12 ${index % 2 === 0 ? "slide-in-left" : "slide-in-right"}`}
+                  style={{ animationDelay: `${index * 0.3}s` }}
+                >
+                  <div
+                    className={`absolute left-6 w-4 h-4 bg-gradient-to-r ${experience.color} rounded-full border-4 border-gray-900 glow-effect`}
+                  ></div>
 
-                {/* Experience Card */}
-                <div className="ml-20">
-                  <div className="card hover-lift">
-                    {/* Header */}
-                    <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
-                      <div>
-                        <div className="flex items-center space-x-3 mb-2">
-                          <span className="text-2xl">{experience.icon}</span>
-                          <h3 className="text-2xl font-bold gradient-text">{experience.role}</h3>
-                        </div>
-                        <h4 className="text-xl text-purple-400 font-semibold mb-1">{experience.company}</h4>
-                        <div className="flex flex-wrap items-center gap-4 text-gray-400">
-                          <span className="flex items-center space-x-1">
-                            <span>📅</span>
-                            <span>{experience.duration}</span>
-                          </span>
-                          <span className="flex items-center space-x-1">
-                            <span>📍</span>
-                            <span>{experience.location}</span>
-                          </span>
-                          <span
-                            className={`px-3 py-1 bg-gradient-to-r ${experience.color} bg-opacity-20 border border-purple-500/30 rounded-full text-sm`}
-                          >
-                            {experience.type}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="grid md:grid-cols-2 gap-6">
-                      {/* Responsibilities */}
-                      <div>
-                        <h5 className="text-lg font-semibold mb-3 text-pink-400">Key Responsibilities</h5>
-                        <ul className="space-y-2">
-                          {experience.responsibilities.map((responsibility, respIndex) => (
-                            <li
-                              key={respIndex}
-                              className="flex items-start space-x-3 text-gray-300 slide-in-up"
-                              style={{ animationDelay: `${index * 0.3 + respIndex * 0.1}s` }}
+                  <div className="ml-20">
+                    <div className="card hover-lift">
+                      <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
+                        <div>
+                          <div className="flex items-center space-x-3 mb-2">
+                            <Icon className="text-2xl text-purple-400" />
+                            <h3 className="text-2xl font-bold gradient-text">{experience.role}</h3>
+                          </div>
+                          <h4 className="text-xl text-purple-400 font-semibold mb-1">{experience.company}</h4>
+                          <div className="flex flex-wrap items-center gap-4 text-gray-400">
+                            <span className="flex items-center space-x-2">
+                              <FaCalendarAlt />
+                              <span>{experience.duration}</span>
+                            </span>
+                            <span className="flex items-center space-x-2">
+                              <FaMapMarkerAlt />
+                              <span>{experience.location}</span>
+                            </span>
+                            <span
+                              className={`px-3 py-1 bg-gradient-to-r ${experience.color} bg-opacity-20 border border-purple-500/30 rounded-full text-sm`}
                             >
-                              <div
-                                className={`w-2 h-2 bg-gradient-to-r ${experience.color} rounded-full mt-2 flex-shrink-0`}
-                              ></div>
-                              <span className="text-sm leading-relaxed">{responsibility}</span>
-                            </li>
-                          ))}
-                        </ul>
+                              {experience.type}
+                            </span>
+                          </div>
+                        </div>
                       </div>
 
-                      {/* Accomplishments */}
-                      <div>
-                        <h5 className="text-lg font-semibold mb-3 text-cyan-400">Key Accomplishments</h5>
-                        <ul className="space-y-2">
-                          {experience.accomplishments.map((accomplishment, accIndex) => (
-                            <li
-                              key={accIndex}
-                              className="flex items-start space-x-3 text-gray-300 slide-in-up"
-                              style={{ animationDelay: `${index * 0.3 + accIndex * 0.1 + 0.2}s` }}
+                      <div className="grid md:grid-cols-2 gap-6">
+                        <div>
+                          <h5 className="text-lg font-semibold mb-3 text-pink-400">Key Responsibilities</h5>
+                          <ul className="space-y-2">
+                            {experience.responsibilities.map((responsibility, respIndex) => (
+                              <li key={respIndex} className="flex items-start space-x-3 text-gray-300">
+                                <div className={`w-2 h-2 bg-gradient-to-r ${experience.color} rounded-full mt-2`} />
+                                <span className="text-sm leading-relaxed">{responsibility}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+
+                        <div>
+                          <h5 className="text-lg font-semibold mb-3 text-cyan-400">Key Accomplishments</h5>
+                          <ul className="space-y-2">
+                            {experience.accomplishments.map((accomplishment, accIndex) => (
+                              <li key={accIndex} className="flex items-start space-x-3 text-gray-300">
+                                <FaStar className="text-green-400 mt-1" />
+                                <span className="text-sm leading-relaxed">{accomplishment}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+
+                      <div className="mt-6 pt-6 border-t border-gray-700">
+                        <h5 className="text-lg font-semibold mb-3 text-yellow-400">Technologies & Skills</h5>
+                        <div className="flex flex-wrap gap-2">
+                          {experience.technologies.map((tech) => (
+                            <span
+                              key={tech}
+                              className={`px-3 py-1 bg-gradient-to-r ${experience.color} bg-opacity-20 border border-purple-500/30 rounded-full text-sm text-gray-300`}
                             >
-                              <div className="text-green-400 mt-1 flex-shrink-0">⭐</div>
-                              <span className="text-sm leading-relaxed">{accomplishment}</span>
-                            </li>
+                              {tech}
+                            </span>
                           ))}
-                        </ul>
-                      </div>
-                    </div>
-
-                    {/* Technologies */}
-                    <div className="mt-6 pt-6 border-t border-gray-700">
-                      <h5 className="text-lg font-semibold mb-3 text-yellow-400">Technologies & Skills</h5>
-                      <div className="flex flex-wrap gap-2">
-                        {experience.technologies.map((tech, techIndex) => (
-                          <span
-                            key={tech}
-                            className={`px-3 py-1 bg-gradient-to-r ${experience.color} bg-opacity-20 border border-purple-500/30 rounded-full text-sm text-gray-300 hover:bg-opacity-30 transition-all duration-300 scale-in`}
-                            style={{ animationDelay: `${index * 0.3 + techIndex * 0.05}s` }}
-                          >
-                            {tech}
-                          </span>
-                        ))}
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
 
-        {/* Experience Summary */}
         <div className="mt-16 text-center slide-in-up">
           <div className="card max-w-3xl mx-auto">
             <h3 className="text-2xl font-bold mb-4 gradient-text">Professional Summary</h3>
             <p className="text-gray-300 text-lg leading-relaxed">
-              With over 2 years of experience in frontend development and technical leadership, I have successfully
-              delivered multiple projects while continuously learning and adapting to new technologies. My experience
-              spans from hands-on development to team coordination, giving me a well-rounded perspective on software
-              development and project management.
+              I have hands-on experience as a Software Developer Intern at Swarajya Digital, where I worked on real-world
+              client projects and built responsive web interfaces using modern technologies. Alongside this, being a Core
+              Team Member at GDG has helped me develop strong collaboration, leadership, and event coordination skills,
+              giving me a balanced blend of technical and community-driven experience.
             </p>
           </div>
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Experience
+export default Experience;

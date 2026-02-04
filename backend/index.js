@@ -11,7 +11,7 @@ const app = express();
 // Middleware
 app.use(express.json());
 app.use(cors({
-    origin: ['http://localhost:5173', `${import.meta.env.VITE_BACKEND_URL}`],
+    origin: ['http://localhost:5173', process.env.FRONTEND_URL || 'http://localhost:5173'],
     credentials: true,
 }));
 

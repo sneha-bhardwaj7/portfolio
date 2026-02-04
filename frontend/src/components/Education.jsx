@@ -1,24 +1,27 @@
 import {
-  FaGraduationCap, // Replaced 🎓
-  FaCalendarAlt, // Replaced 📅
-  FaMapMarkerAlt, // Replaced 📍
-  FaChartBar, // Replaced 📊
-  FaCode, // Replaced 💻
-  FaTrophy, // Replaced 🏆
-  FaAward, // Replaced 🥇 (or another trophy icon)
-  FaStar, // Replaced 🌟
+  FaGraduationCap,
+  FaCalendarAlt,
+  FaMapMarkerAlt,
+  FaChartBar,
+  FaCode,
+  FaTrophy,
+  FaAward,
+  FaStar,
 } from 'react-icons/fa';
-import { SiPostman } from 'react-icons/si'; // Replaced 📮
-import { MdOutlineComputer, MdApi, MdOutlineSchool, MdOutlineScience } from 'react-icons/md'; // Replaced 🤖 and other generic icons
+import { SiPostman } from 'react-icons/si';
+import { MdOutlineScience } from 'react-icons/md';
 
 const Education = () => {
   const education = {
-    degree: "Bachelor of Technology in Computer Science",
+    degree: "Bachelor of Technology",
     university: "Quantum University",
-    duration: "2021 - 2025",
+    duration: "2023 - 2027",
     location: "India",
-    // Note: I'm converting the '8.65linke/10' format to a more standard '8.65/10'
-    gpa: "8.65/10", 
+    currentCgpa: "8.79/10",
+    highlights: [
+      "9+ SGPA in 2 semesters",
+      "Strong academic performance in core CS subjects",
+    ],
     relevantCourses: [
       "Data Structures & Algorithms",
       "Web Development",
@@ -27,16 +30,16 @@ const Education = () => {
       "Computer Networks",
       "Object-Oriented Programming",
     ],
-  }
+  };
 
   const certifications = [
     {
       name: "Postman API Fundamentals",
       issuer: "Postman",
       date: "2024",
-      description: "Comprehensive certification covering API testing, documentation, and automation using Postman",
+      description: "Hands-on certification covering API testing, documentation, and automation using Postman.",
       skills: ["API Testing", "REST APIs", "API Documentation", "Automation"],
-      Icon: SiPostman, // Replaced 📮
+      Icon: SiPostman,
       color: "from-orange-500 to-red-500",
       credentialId: "POST-2024-001",
     },
@@ -45,26 +48,24 @@ const Education = () => {
       issuer: "Google Cloud",
       date: "2024",
       description:
-        "Advanced certification in Generative AI technologies, machine learning, and AI application development",
-      skills: ["Generative AI", "Machine Learning", "AI Ethics", "Prompt Engineering"],
-      Icon: MdOutlineScience, // Replaced 🤖
+        "Certification covering Generative AI concepts, prompt engineering, and building AI-powered applications.",
+      skills: ["Generative AI", "Prompt Engineering", "AI Ethics", "ML Basics"],
+      Icon: MdOutlineScience,
       color: "from-purple-500 to-pink-500",
       credentialId: "GEN-AI-2024-002",
     },
-  ]
+  ];
 
   const achievements = [
-    { title: "Dean's List", description: "Maintained high academic performance", Icon: FaTrophy }, // Replaced 🏆
-    { title: "Gdg core team", description: "Gdg core team member", Icon: FaAward }, // Replaced 🥇
-    { title: "Intern At Swarajya", description: "Get the industry experence in the second year", Icon: FaStar }, // Replaced 🌟
-    { title: "Hackathon Participant", description: "Participated in 5+ hackathons", Icon: FaCode }, // Replaced 💻
-  ]
+    { title: "Academic Excellence", description: "9+ SGPA in two semesters", Icon: FaTrophy },
+    { title: "GDG Core Team", description: "Active core team member at GDG", Icon: FaAward },
+    { title: "Industry Internship", description: "Software Intern at Swarajya Digital", Icon: FaStar },
+    { title: "Hackathons", description: "Participated in multiple hackathons", Icon: FaCode },
+  ];
 
-  // Helper component to render the Icon dynamically
   const IconWrapper = ({ Icon, size = 24, className = "" }) => (
     <Icon className={`w-auto h-auto ${className}`} size={size} />
   );
-
 
   return (
     <section id="education" className="py-20 bg-gradient-to-br from-gray-900 to-gray-800 relative overflow-hidden text-white">
@@ -83,13 +84,12 @@ const Education = () => {
             Education & <span className="gradient-text">Certifications</span>
           </h2>
           <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-            My academic background and professional certifications that fuel my expertise
+            My academic background and certifications that support my technical growth
           </p>
           <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto rounded-full mt-6"></div>
         </div>
 
         <div className="max-w-6xl mx-auto">
-          
           {/* Education */}
           <div className="mb-16 slide-in-left">
             <div className="card hover-lift p-8 bg-gray-800/50 rounded-xl shadow-xl border border-gray-700/50 backdrop-blur-sm">
@@ -108,21 +108,22 @@ const Education = () => {
                   <div className="space-y-4">
                     <div className="flex items-center space-x-3 text-gray-300">
                       <IconWrapper Icon={FaCalendarAlt} size={20} className="text-pink-400" />
-                      <span>
-                        <strong>Duration:</strong> {education.duration}
-                      </span>
+                      <span><strong>Duration:</strong> {education.duration}</span>
                     </div>
                     <div className="flex items-center space-x-3 text-gray-300">
                       <IconWrapper Icon={FaMapMarkerAlt} size={20} className="text-pink-400" />
-                      <span>
-                        <strong>Location:</strong> {education.location}
-                      </span>
+                      <span><strong>Location:</strong> {education.location}</span>
                     </div>
                     <div className="flex items-center space-x-3 text-gray-300">
                       <IconWrapper Icon={FaChartBar} size={20} className="text-pink-400" />
                       <span>
-                        <strong>CGPA:</strong> <span className="text-green-400 font-semibold">{education.gpa}</span>
+                        <strong>Current CGPA:</strong>{" "}
+                        <span className="text-green-400 font-semibold">{education.currentCgpa}</span>
                       </span>
+                    </div>
+                    <div className="flex items-center space-x-3 text-gray-300">
+                      <IconWrapper Icon={FaTrophy} size={20} className="text-yellow-400" />
+                      <span><strong>Highlights:</strong> {education.highlights.join(" • ")}</span>
                     </div>
                   </div>
                 </div>
@@ -146,71 +147,53 @@ const Education = () => {
             </div>
           </div>
 
-          ---
-
           {/* Certifications */}
           <div className="mb-16">
             <h3 className="text-3xl font-bold text-center mb-8 slide-in-up">
               Professional <span className="gradient-text">Certifications</span>
             </h3>
-
             <div className="grid lg:grid-cols-2 gap-8">
               {certifications.map((cert, index) => (
                 <div
                   key={cert.name}
-                  className={`card hover-lift glow-effect p-6 bg-gray-800/50 rounded-xl shadow-lg border border-gray-700/50 backdrop-blur-sm ${index % 2 === 0 ? "slide-in-left" : "slide-in-right"}`}
-                  style={{ animationDelay: `${index * 0.3}s` }}
+                  className={`card hover-lift glow-effect p-6 bg-gray-800/50 rounded-xl shadow-lg border border-gray-700/50 backdrop-blur-sm`}
                 >
                   <div className="flex items-start space-x-4 mb-4">
-                    <div
-                      className={`w-12 h-12 bg-gradient-to-r ${cert.color} rounded-lg flex items-center justify-center floating-element`}
-                    >
+                    <div className={`w-12 h-12 bg-gradient-to-r ${cert.color} rounded-lg flex items-center justify-center floating-element`}>
                       <IconWrapper Icon={cert.Icon} size={22} />
                     </div>
                     <div className="flex-1">
                       <h4 className="text-xl font-bold gradient-text mb-1">{cert.name}</h4>
-                      <p className="text-purple-400 font-semibold">
-                        {cert.issuer} • {cert.date}
-                      </p>
+                      <p className="text-purple-400 font-semibold">{cert.issuer} • {cert.date}</p>
                       <p className="text-xs text-gray-500 mt-1">ID: {cert.credentialId}</p>
                     </div>
                   </div>
-
                   <p className="text-gray-300 mb-4 leading-relaxed">{cert.description}</p>
-
-                  <div>
-                    <h5 className="text-sm font-semibold mb-2 text-yellow-400">Skills Acquired</h5>
-                    <div className="flex flex-wrap gap-2">
-                      {cert.skills.map((skill, skillIndex) => (
-                        <span
-                          key={skill}
-                          className={`px-2 py-1 bg-gradient-to-r ${cert.color} bg-opacity-20 border border-purple-500/30 rounded-full text-xs text-gray-300 scale-in`}
-                          style={{ animationDelay: `${index * 0.3 + skillIndex * 0.1}s` }}
-                        >
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
+                  <div className="flex flex-wrap gap-2">
+                    {cert.skills.map((skill) => (
+                      <span
+                        key={skill}
+                        className={`px-2 py-1 bg-gradient-to-r ${cert.color} bg-opacity-20 border border-purple-500/30 rounded-full text-xs text-gray-300`}
+                      >
+                        {skill}
+                      </span>
+                    ))}
                   </div>
                 </div>
               ))}
             </div>
           </div>
 
-          ---
-          
           {/* Achievements */}
           <div className="slide-in-up">
             <h3 className="text-3xl font-bold text-center mb-8">
               Academic <span className="gradient-text">Achievements</span>
             </h3>
-
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               {achievements.map((achievement, index) => (
                 <div
                   key={achievement.title}
                   className="card text-center hover-lift glow-effect bounce-in p-5 bg-gray-800/50 rounded-xl shadow-lg border border-gray-700/50"
-                  style={{ animationDelay: `${index * 0.2}s` }}
                 >
                   <div className="text-3xl mb-3 floating-element mx-auto w-fit text-yellow-400">
                     <IconWrapper Icon={achievement.Icon} size={30} />
@@ -221,25 +204,10 @@ const Education = () => {
               ))}
             </div>
           </div>
-
-          ---
-          
-          {/* Learning Philosophy */}
-          {/* <div className="mt-16 text-center slide-in-up">
-            <div className="card max-w-3xl mx-auto p-8 bg-gray-800/50 rounded-xl shadow-2xl border border-purple-500/50 backdrop-blur-sm">
-              <h3 className="text-2xl font-bold mb-4 gradient-text">Continuous Learning Philosophy</h3>
-              <p className="text-gray-300 text-lg leading-relaxed">
-                I believe in lifelong learning and staying updated with the latest technologies. My educational journey
-                doesn't end with formal degrees - I continuously pursue **certifications**, attend **workshops**, and contribute
-                to **open-source projects** to enhance my skills and knowledge in the ever-evolving field of web
-                development.
-              </p>
-            </div>
-          </div> */}
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Education
+export default Education;
