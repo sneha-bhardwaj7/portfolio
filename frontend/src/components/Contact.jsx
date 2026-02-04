@@ -70,39 +70,42 @@ const Contact = () => {
     })
   }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-    setSubmitStatus("")
+const handleSubmit = async (e) => {
+  e.preventDefault()
+  setIsSubmitting(true)
+  setSubmitStatus("")
 
-    try {
-      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/contact`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      })
+  try {
+    // ✅ Hardcode for now, then move to .env later
+    const backendUrl = import.meta.env.VITE_BACKEND_URL || 'https://portfolio-xclj.onrender.com';
+    
+    const response = await fetch(`${backendUrl}/api/contact`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    })
 
-      const data = await response.json()
+    const data = await response.json()
 
-      if (response.ok) {
-        setSubmitStatus("success")
-        setFormData({ name: "", email: "", subject: "", message: "" })
-      } else {
-        console.error("Form submission failed:", data)
-        setSubmitStatus("error")
-      }
-    } catch (error) {
-      console.error("Network error during form submission:", error)
+    if (response.ok) {
+      setSubmitStatus("success")
+      setFormData({ name: "", email: "", subject: "", message: "" })
+    } else {
+      console.error("Form submission failed:", data)
       setSubmitStatus("error")
-    } finally {
-      setIsSubmitting(false)
-      setTimeout(() => {
-        setSubmitStatus("")
-      }, 5000)
     }
+  } catch (error) {
+    console.error("Network error during form submission:", error)
+    setSubmitStatus("error")
+  } finally {
+    setIsSubmitting(false)
+    setTimeout(() => {
+      setSubmitStatus("")
+    }, 5000)
   }
+}
 
   return (
     <section id="contact" className="py-20 bg-gradient-to-br from-gray-800 to-gray-900 relative overflow-hidden">
