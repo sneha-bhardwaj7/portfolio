@@ -7,26 +7,17 @@ import contactRoutes from './routers/contactRouter.js';
 dotenv.config();
 const app = express();
 
-// ✅ MIDDLEWARE ORDER IS CRITICAL - Don't change this order!
+// ✅ MIDDLEWARE - Order matters!
 
-// 1. JSON Parser FIRST
+// 1. JSON Parser
 app.use(express.json());
 
-// 2. CORS Configuration with explicit settings
+// 2. CORS Configuration
 const corsOptions = {
-    origin: function (origin, callback) {
-        const allowedOrigins = [
-            'http://localhost:5173',
-            'https://portfolio-207.vercel.app'
-        ];
-        
-        // Allow requests with no origin (like mobile apps, curl, Postman)
-        if (!origin || allowedOrigins.includes(origin)) {
-            callback(null, true);
-        } else {
-            callback(new Error('Not allowed by CORS'));
-        }
-    },
+    origin: [
+        'http://localhost:5173',
+        'https://portfolio-207.vercel.app'
+    ],
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
@@ -34,9 +25,6 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-
-// 3. Handle preflight requests explicitly
-app.options('*', cors(corsOptions));
 
 // Mongoose Connection
 const connectDB = async () => {
@@ -51,7 +39,7 @@ const connectDB = async () => {
 
 connectDB();
 
-// 4. Routes
+// Routes
 app.use('/api', contactRoutes);
 
 // Test route
