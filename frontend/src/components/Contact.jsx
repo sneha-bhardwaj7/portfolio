@@ -76,7 +76,6 @@ const handleSubmit = async (e) => {
   setSubmitStatus("")
 
   try {
-    // ✅ Hardcode for now, then move to .env later
     const backendUrl = import.meta.env.VITE_BACKEND_URL || 'https://portfolio-xclj.onrender.com';
     
     const response = await fetch(`${backendUrl}/api/contact`, {
