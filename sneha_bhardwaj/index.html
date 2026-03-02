@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Sneha Bhardwaj - Fullstack Developer">
+  <meta name="theme-color" content="#080c10">
+  <title>Sneha Bhardwaj — Fullstack Developer</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    crossorigin="anonymous" referrerpolicy="no-referrer">
+  <link rel="icon" href="./assets/images/my-avatar.png" type="image/png">
+  <link rel="stylesheet" href="./assets/style.css">
+
+  <!-- Config must load before script.js -->
+  <script src="./assets/config.js"></script>
+</head>
+
+<body>
+
+  <!-- Custom cursor dots -->
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- Canvas background -->
+  <canvas id="bgCanvas" aria-hidden="true"></canvas>
+
+  <!-- ════════════════════════════════════════════════
+       FLOATING TOP NAV
+  ════════════════════════════════════════════════ -->
+  <header class="topnav" id="topnav" role="banner">
+    <div class="topnav-inner">
+      <!-- Logo -->
+      <a class="topnav-logo" href="#" onclick="switchSection('about');return false;">
+        <img id="logoAvatar" src="https://github.com/sneha-bhardwaj.png" alt="Sneha" class="logo-avatar"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <span class="logo-initials-fb" style="display:none">SB</span>
+        <span class="logo-name">Sneha Bhardwaj</span>
+      </a>
+
+      <!-- Desktop nav pills (hidden on mobile) -->
+      <nav class="topnav-pills" id="topnavPills" role="navigation" aria-label="Page sections"></nav>
+
+      <!-- Mobile-only three-pill nav — SIBLING of logo and controls, fills centre -->
+      <div class="mobile-two-pills" id="mobileTwoPills" role="navigation" aria-label="Mobile navigation">
+        <button class="m2-pill active" id="m2About" onclick="switchMobileView('about')">About</button>
+        <button class="m2-pill" id="m2Projects" onclick="switchMobileView('projects')">Projects</button>
+        <button class="m2-pill" id="m2Contact" onclick="switchMobileView('contact')">Contact</button>
+      </div>
+
+      <!-- Controls (theme toggle only) -->
+      <div class="topnav-controls">
+        <button class="icon-btn" id="themeToggle" aria-label="Toggle theme" title="Switch light / dark">
+          <i class="fas fa-moon" id="themeIcon"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- ════════════════════════════════════════════════
+       LAYOUT: SIDEBAR + MAIN
+  ════════════════════════════════════════════════ -->
+  <div class="page-layout">
+
+    <!-- Sidebar (profile + contact only, no nav) -->
+    <aside class="sidebar" id="sidebar">
+
+      <div class="profile-wrap">
+        <div class="avatar-glow">
+          <a href="https://github.com/sneha-bhardwaj" target="_blank" rel="noopener" class="avatar-link">
+            <img id="avatarImg" src="https://github.com/sneha-bhardwaj.png" alt="Sneha Bhardwaj" class="avatar-img" width="96"
+              height="96">
+            <div class="avatar-ring"></div>
+          </a>
+        </div>
+        <h1 class="profile-name" id="profileName">Sneha Bhardwaj</h1>
+        <div class="profile-role">
+          <span class="role-prefix">&lt;</span><span id="typedRole"></span><span class="role-suffix">/&gt;</span>
+        </div>
+        <div class="profile-location" id="profileLocation">
+          <i class="fas fa-map-marker-alt"></i> Roorkee, India
+        </div>
+        <div class="status-pill">
+          <span class="status-dot"></span> Open to work
+        </div>
+      </div>
+
+      <!-- Divider -->
+      <div class="sidebar-divider"></div>
+
+      <!-- Contact rows -->
+      <nav class="contact-nav" id="contactNav" aria-label="Contact info"></nav>
+
+      <!-- Divider -->
+      <div class="sidebar-divider"></div>
+
+      <!-- Socials -->
+      <div class="socials-row" id="socialsRow"></div>
+
+    </aside>
+
+    <!-- Main content -->
+    <main class="main-content" id="mainContent">
+
+      <!-- ── ABOUT ── -->
+      <section class="section active" id="about">
+
+        <!-- Hero -->
+        <div class="hero-banner" id="heroBanner">
+          <div class="hero-grid-lines" aria-hidden="true"></div>
+          <div class="hero-text">
+            <p class="hero-greeting">Hello, I'm Sneha. Nice to meet you.</p>
+            <h2 class="hero-title">I build <span class="gradient-text">scalable full-stack</span><br>applications with Modern Tech.</h2>
+            <p class="hero-sub">MERN Stack Developer · AI Integration · Problem Solver · Open to Work</p>
+            <div class="hero-cta">
+              <a href="./assets/sneharesume.pdf" download class="btn-primary">Download Resume <i
+                  class="fas fa-download"></i></a>
+              <button class="btn-outline" onclick="switchSection('contact')">Hire Me <i
+                  class="fas fa-handshake"></i></button>
+            </div>
+          </div>
+          <div class="hero-visual">
+            <div class="hero-card-float tilt-target" id="heroCard">
+              <div class="code-window">
+                <div class="code-dots"><span></span><span></span><span></span></div>
+                <pre class="code-body"><code><span class="ct">const</span> <span class="cn">sneha</span> = {
+  role:     <span class="cs">"Fullstack Developer"</span>,
+  focus:    <span class="cs">"MERN Stack"</span>,
+  stack:    [<span class="cs">"React"</span>,
+             <span class="cs">"Node.js"</span>,
+             <span class="cs">"MongoDB"</span>],
+  skills:   <span class="cs">"APIs, Databases, AI"</span>,
+  passion:  <span class="cs">"Building Smart Apps"</span>
+};</code></pre>
+              </div>
+            </div>
+          </div>
+        </div><!-- /hero -->
+
+        <!-- Stats -->
+        <div class="stats-row" id="statsRow"></div>
+
+        <!-- About text + focus -->
+        <div class="two-col-grid">
+          <div class="glass-card reveal">
+            <div class="card-header-icon"><i class="fas fa-user-astronaut"></i></div>
+            <h3>Who I Am</h3>
+            <p>I'm a backend-focused fullstack developer from India, now based in Roorkee. I'm passionate about building scalable web platforms with strong fundamentals in APIs, databases, and AI-integrated workflows.</p>
+            <p>Currently working on <strong>AI-Powered Backend Systems</strong> — architecting intelligent platforms that solve real-world problems.</p>
+          </div>
+          <div class=fullstack developer from Roorkee, India, passionate about building scalable web platforms. I specialize in MERN stack development with strong fundamentals in APIs, databases, and AI-integrated workflows.</p>
+            <p>Currently focusing on <strong>Full-Stack Web Development</strong> — architecting intelligent platforms that solve real-world problems using modern technology.</p>
+          </div>
+          <div class="glass-card reveal">
+            <div class="card-header-icon"><i class="fas fa-bullseye"></i></div>
+            <h3>What I'm Focused On</h3>
+            <ul class="check-list">
+              <li><i class="fas fa-check-circle"></i> Building REST APIs &amp; WebSocket implementations</li>
+              <li><i class="fas fa-check-circle"></i> Database design &amp; optimization (MongoDB, MySQL)</li>
+              <li><i class="fas fa-check-circle"></i> Full-stack applications with React &amp; Node.js</li>
+              <li><i class="fas fa-check-circle"></i> AI/Automation integration with LangChain &amp; OpenAI</li>
+              <li><i class="fas fa-check-circle"></i> Cloud deployment &amp; DevOps (
+
+        <!-- Services -->
+        <div class="section-label">What I Do</div>
+        <div class="services-grid" id="servicesGrid"></div>
+
+      </section><!-- /about -->
+
+      <!-- ── RESUME ── -->
+      <section class="section" id="resume">
+        <div class="section-label">Resume</div>
+        <div class="resume-grid">
+          <div class="glass-card reveal">
+            <h3 class="resume-col-title"><i class="fas fa-graduation-cap"></i> Education</h3>
+            <ol class="timeline" id="educationList"></ol>
+          </div>
+          <div class="glass-card reveal">
+            <h3 class="resume-col-title"><i class="fas fa-briefcase"></i> Experience</h3>
+            <ol class="timeline" id="experienceList"></ol>
+          </div>
+        </div>
+
+        <div class="glass-card reveal" style="margin-top:1.5rem;">
+          <h3 class="resume-col-title"><i class="fas fa-layer-group"></i> Skills</h3>
+          <div class="skills-grid" id="skillsGrid"></div>
+        </div>
+
+        <div class="glass-card reveal" style="margin-top:1.5rem;">
+          <h3 class="resume-col-title"><i class="fas fa-cubes"></i> Full Tech Stack</h3>
+          <div class="tech-groups" id="techStackGroups"></div>
+        </div>
+      </section><!-- /resume -->
+
+      <!-- ── PROJECTS ── -->
+      <section class="section" id="projects">
+        <!-- Mobile toggle: Projects ↿ Repos (only visible on mobile) -->
+        <div class="mobile-proj-tabs" id="mobileProjTabs">
+          <button class="mpt-btn active" id="mptProjects" onclick="switchMobileProj('projects')">
+            <i class="fas fa-folder-open"></i> Projects
+          </button>
+          <button class="mpt-btn" id="mptRepos" onclick="switchMobileProj('repos')">
+            <i class="fab fa-github"></i> Repositories
+          </button>
+        </div>
+
+        <!-- Projects sub-view -->
+        <div id="projView">
+          <div class="section-label">Projects</div>
+          <div class="filter-bar" id="projectFilterBar" role="group" aria-label="Filter projects"></div>
+          <div class="projects-grid" id="myProjectsGrid"></div>
+        </div>
+
+        <!-- Repos sub-view (mobile Projects toggle: Repos) -->
+        <div id="reposMobileView" style="display:none">
+          <div class="section-label">Repositories</div>
+          <div class="repos-grid" id="reposGridMobile"></div>
+        </div>
+      </section>
+
+      <!-- ── MY WORK (CERTIFICATIONS) ── -->
+      <section class="section" id="mywork">
+        <div class="section-label">Certifications</div>
+        <div class="repos-grid" id="reposGrid"></div>
+      </section>
+
+      <!-- ── CONTACT ── -->
+      <section class="section" id="contact">
+        <div class="section-label">Contact</div>
+        <div class="contact-layout">
+          <div class="glass-card reveal">
+            <h3 class="resume-col-title"><i class="fas fa-paper-plane"></i> Send a Message</h3>
+            <form class="contact-form" id="contactForm" novalidate>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="cName">Full Name</label>
+                  <input type="text" id="cName" name="name" placeholder="Your name" autocomplete="name" required>
+                </div>
+                <div class="form-group">
+                  <label for="cEmail">Email</label>
+                  <input type="email" id="cEmail" name="email" placeholder="you@email.com" autocomplete="email"
+                    required>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="cMessage">Message</label>
+                <textarea id="cMessage" name="message" rows="5" placeholder="Tell me what you're building…"
+                  required></textarea>
+              </div>
+              <button type="submit" class="btn-primary" id="submitBtn">
+                <i class="fas fa-paper-plane"></i> Send Message
+              </button>
+            </form>
+          </div>
+          <div class="contact-right">
+            <div class="glass-card reveal" id="contactInfoCard"></div>
+            <div class="map-wrap reveal">
+              <iframe id="mapFrame" title="Location map" allowfullscreen loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div><!-- /page-layout -->
+
+  <script src="./assets/script.js"></script>
+</body>
+
+</html>
