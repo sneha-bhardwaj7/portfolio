@@ -63,7 +63,6 @@ function initTheme() {
    2. CUSTOM CURSOR  (faster — 28% lag instead of 14%)
    ──────────────────────────────────────────────────── */
 function initCursor() {
-  // Custom cursor removed — using default browser cursor
   const dot = document.getElementById('cursorDot');
   const ring = document.getElementById('cursorRing');
   if (dot) dot.style.display = 'none';
@@ -81,8 +80,8 @@ function initCanvas() {
   let isDark = document.documentElement.getAttribute('data-theme') !== 'light';
   let W, H, nodes = [];
 
-  const N = 60;             // node count
-  const DIST = 170;         // max connection distance
+  const N = 60;
+  const DIST = 170;
   const DOT_ALPHA_DARK = 0.6;
   const DOT_ALPHA_LIGHT = 0.45;
   const LINE_ALPHA_MAX_DARK = 0.28;
@@ -114,7 +113,6 @@ function initCanvas() {
       if (n.y < 0 || n.y > H) n.vy *= -1;
     });
 
-    // Connections
     for (let i = 0; i < nodes.length; i++) {
       for (let j = i + 1; j < nodes.length; j++) {
         const dx = nodes[i].x - nodes[j].x, dy = nodes[i].y - nodes[j].y;
@@ -130,7 +128,6 @@ function initCanvas() {
       }
     }
 
-    // Dots
     nodes.forEach(n => {
       ctx.fillStyle = `rgba(${aRGB},${dotA})`;
       ctx.beginPath();
@@ -148,17 +145,15 @@ function initCanvas() {
 }
 
 /* ────────────────────────────────────────────────────
-   4. FLOATING TOP NAV  (desktop pills built from config)
+   4. FLOATING TOP NAV
    ──────────────────────────────────────────────────── */
 function buildTopNav() {
   const pillsEl = document.getElementById('topnavPills');
   if (!pillsEl) return;
 
-  // Update logo avatar from config
   const logoAv = document.getElementById('logoAvatar');
   if (logoAv && CONFIG_PERSONAL.avatar) logoAv.src = CONFIG_PERSONAL.avatar;
 
-  // Desktop pills only
   CONFIG_NAV.forEach((item, i) => {
     const btn = document.createElement('button');
     btn.className = 'topnav-pill' + (i === 0 ? ' active' : '');
@@ -168,7 +163,6 @@ function buildTopNav() {
     pillsEl.appendChild(btn);
   });
 
-  // Scroll: add .scrolled class to topnav
   const nav = document.getElementById('topnav');
   window.addEventListener('scroll', () => {
     nav?.classList.toggle('scrolled', window.scrollY > 20);
@@ -177,20 +171,16 @@ function buildTopNav() {
 
 /* ────────────────────────────────────────────────────
    4b. MOBILE VIEW SWITCHING
-   About = stacked about+resume+contact
-   Projects = projects section with sub-toggle
    ──────────────────────────────────────────────────── */
 function isMobile() {
   return window.matchMedia('(max-width:768px)').matches;
 }
 
 function switchMobileView(view) {
-  // Update pill active state
   document.getElementById('m2About')?.classList.toggle('active', view === 'about');
   document.getElementById('m2Projects')?.classList.toggle('active', view === 'projects');
   document.getElementById('m2Contact')?.classList.toggle('active', view === 'contact');
 
-  // Set data attribute on main-content — CSS handles show/hide via selectors
   const main = document.getElementById('mainContent');
   if (main) main.setAttribute('data-mobile', view);
 
@@ -202,7 +192,7 @@ function switchMobileView(view) {
 window.switchMobileView = switchMobileView;
 
 /* ────────────────────────────────────────────────────
-   4c. MOBILE PROJECTS SUB-TOGGLE (Projects ↔ Repos)
+   4c. MOBILE PROJECTS SUB-TOGGLE
    ──────────────────────────────────────────────────── */
 function switchMobileProj(view) {
   document.getElementById('mptProjects')?.classList.toggle('active', view === 'projects');
@@ -214,7 +204,6 @@ function switchMobileProj(view) {
   if (projView) projView.style.display = (view === 'projects') ? '' : 'none';
   if (reposView) reposView.style.display = (view === 'repos') ? '' : 'none';
 
-  // Lazy-load repos once
   if (view === 'repos' && !window._mobileReposLoaded) {
     window._mobileReposLoaded = true;
     renderReposMobile();
@@ -223,11 +212,9 @@ function switchMobileProj(view) {
 window.switchMobileProj = switchMobileProj;
 
 /* ────────────────────────────────────────────────────
-   5. SECTION SWITCHING  (desktop only)
-      On mobile, switchMobileView handles visibility.
+   5. SECTION SWITCHING (desktop only)
    ──────────────────────────────────────────────────── */
 function switchSection(id) {
-  // On mobile, delegate to mobile view
   if (isMobile()) {
     if (['about', 'resume'].includes(id)) return switchMobileView('about');
     if (['projects', 'mywork'].includes(id)) return switchMobileView('projects');
@@ -244,14 +231,13 @@ function switchSection(id) {
   if (id === 'resume') animateSkillBars();
   if (id === 'mywork' && !window._reposLoaded) { window._reposLoaded = true; renderRepos(); }
 
-  // Re-trigger reveal animations for newly visible elements
   setTimeout(initReveal, 60);
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 window.switchSection = switchSection;
 
 /* ────────────────────────────────────────────────────
-   6. HERO PARALLAX (card tilts with mouse in hero)
+   6. HERO PARALLAX
    ──────────────────────────────────────────────────── */
 function initParallax() {
   const hero = document.getElementById('heroBanner');
@@ -274,7 +260,7 @@ function initParallax() {
 }
 
 /* ────────────────────────────────────────────────────
-   7. SERVICE CARD GLOW  — properly tracks mouse per-card
+   7. SERVICE CARD GLOW
    ──────────────────────────────────────────────────── */
 function initServiceGlow() {
   document.querySelectorAll('.service-card').forEach(card => {
@@ -289,15 +275,13 @@ function initServiceGlow() {
 }
 
 /* ────────────────────────────────────────────────────
-   8. 3D CARD TILT  (project cards + hero card)
-      Re-runs after renderProjects adds new DOM nodes.
+   8. 3D CARD TILT
    ──────────────────────────────────────────────────── */
 function initTilt(scope) {
   if (!window.matchMedia('(hover:hover) and (pointer:fine)').matches) return;
   const root = scope || document;
 
   root.querySelectorAll('.tilt-target').forEach(card => {
-    // Remove old listener to avoid duplicates
     card._onTiltMove && card.removeEventListener('mousemove', card._onTiltMove);
     card._onTiltLeave && card.removeEventListener('mouseleave', card._onTiltLeave);
 
@@ -385,18 +369,15 @@ function animateSkillBars() {
    13. BUILD SIDEBAR FROM CONFIG
    ──────────────────────────────────────────────────── */
 function buildSidebar() {
-  // Avatar
   const img = document.getElementById('avatarImg');
   if (img) img.src = CONFIG_PERSONAL.avatar;
 
-  // Name & location
   const nm = document.getElementById('profileName');
   if (nm) nm.textContent = CONFIG_PERSONAL.name;
 
   const loc = document.getElementById('profileLocation');
   if (loc) loc.innerHTML = `<i class="fas fa-map-marker-alt"></i> ${CONFIG_PERSONAL.location}`;
 
-  // Contact nav
   const cNav = document.getElementById('contactNav');
   if (cNav) {
     const rows = [
@@ -413,7 +394,6 @@ function buildSidebar() {
     }).join('');
   }
 
-  // Socials
   const sr = document.getElementById('socialsRow');
   if (sr) {
     sr.innerHTML = CONFIG_SOCIALS.map(s =>
@@ -426,7 +406,6 @@ function buildSidebar() {
    14. ABOUT: stats + services
    ──────────────────────────────────────────────────── */
 function buildAbout() {
-  // Stats
   const sr = document.getElementById('statsRow');
   if (sr) {
     sr.innerHTML = CONFIG_STATS.map(s =>
@@ -437,10 +416,9 @@ function buildAbout() {
          <span class="stat-label">${s.label}</span>
        </div>`
     ).join('');
-    initCounters(); // observe newly added counters
+    initCounters();
   }
 
-  // Services
   const sg = document.getElementById('servicesGrid');
   if (sg) {
     sg.innerHTML = CONFIG_SERVICES.map(s =>
@@ -451,12 +429,14 @@ function buildAbout() {
          <p>${s.desc}</p>
        </div>`
     ).join('');
-    initServiceGlow(); // attach per-card mousemove for glow
+    initServiceGlow();
   }
 }
 
 /* ────────────────────────────────────────────────────
-   15. RESUME: timeline, skills, tech stack
+   15. RESUME: timeline + skills as chips
+   FIX: CONFIG_SKILLS uses .chips (not .items), no .width property.
+        CONFIG_TECH_STACK does not exist — reuse CONFIG_SKILLS.
    ──────────────────────────────────────────────────── */
 function buildResume() {
   function tlHtml(items) {
@@ -478,26 +458,23 @@ function buildResume() {
   const exp = document.getElementById('experienceList');
   if (exp) exp.innerHTML = tlHtml(CONFIG_EXPERIENCE);
 
-  // Skills
+  // ── FIX: CONFIG_SKILLS uses .chips, not .items with .width ──
   const sg = document.getElementById('skillsGrid');
   if (sg) {
     sg.innerHTML = CONFIG_SKILLS.map(group =>
       `<div class="skill-group">
          <span class="skill-group-label">${group.group}</span>
-         ${group.items.map(sk =>
-        `<div class="skill-row">
-              <div class="skill-meta-row"><span>${sk.name}</span><span class="skill-pct">${sk.width}%</span></div>
-              <div class="skill-track"><div class="skill-fill" data-width="${sk.width}"></div></div>
-            </div>`
-      ).join('')}
+         <div class="tech-chips">
+           ${group.chips.map(chip => `<span class="chip">${chip}</span>`).join('')}
+         </div>
        </div>`
     ).join('');
   }
 
-  // Tech stack
+  // ── FIX: CONFIG_TECH_STACK doesn't exist — use CONFIG_SKILLS instead ──
   const tg = document.getElementById('techStackGroups');
   if (tg) {
-    tg.innerHTML = CONFIG_TECH_STACK.map(g =>
+    tg.innerHTML = CONFIG_SKILLS.map(g =>
       `<div class="tech-group">
          <span class="tech-group-label">${g.group}</span>
          <div class="tech-chips">${g.chips.map(c => `<span class="chip">${c}</span>`).join('')}</div>
@@ -507,7 +484,7 @@ function buildResume() {
 }
 
 /* ────────────────────────────────────────────────────
-   16. PROJECTS  (reads CONFIG_PROJECTS)
+   16. PROJECTS
    ──────────────────────────────────────────────────── */
 function buildProjectFilters() {
   const bar = document.getElementById('projectFilterBar');
@@ -577,11 +554,11 @@ async function renderProjects() {
   }));
 
   grid.innerHTML = cards.join('');
-  initTilt(grid); // tilt on new cards
+  initTilt(grid);
 }
 
 /* ────────────────────────────────────────────────────
-   17. GITHUB REPOS  (cached)
+   17. GITHUB REPOS (cached)
    ──────────────────────────────────────────────────── */
 const GH_CACHE_K = 'rg_repos_v3';
 const GH_TTL = 60 * 60 * 1000;
@@ -598,7 +575,7 @@ async function fetchRepos() {
     if (raw) { const { ts, data } = JSON.parse(raw); if (Date.now() - ts < GH_TTL) return data; }
   } catch (_) { }
 
-  const user = CONFIG_GITHUB_USER || 'shivam-raj';
+  const user = CONFIG_GITHUB_USER || 'sneha-bhardwaj';
   const res = await fetch(`https://api.github.com/users/${user}/repos?per_page=100&sort=updated`);
   if (!res.ok) throw new Error(`GH ${res.status}`);
   const data = await res.json();
@@ -610,7 +587,6 @@ async function renderRepos() {
   const grid = document.getElementById('reposGrid');
   if (!grid) return;
 
-  // Check if we should render certifications instead
   if (typeof CONFIG_CERTIFICATIONS !== 'undefined' && CONFIG_CERTIFICATIONS.length > 0) {
     grid.innerHTML = CONFIG_CERTIFICATIONS.map(cert => `
       <article class="certification-card">
@@ -621,7 +597,6 @@ async function renderRepos() {
         <div class="certification-body">
           <h3 class="cert-title">${cert.title}</h3>
           <p class="cert-desc">${cert.description || ''}</p>
-         
         </div>
       </article>`).join('');
     return;
@@ -650,7 +625,7 @@ async function renderRepos() {
         </div>
       </article>`).join('');
   } catch (_) {
-    const u = CONFIG_GITHUB_USER || 'shivam-raj';
+    const u = CONFIG_GITHUB_USER || 'sneha-bhardwaj';
     grid.innerHTML = `
       <div style="text-align:center;padding:3rem;color:var(--text-2);">
         <i class="fas fa-triangle-exclamation" style="font-size:1.5rem;color:#ff6b6b;"></i>
@@ -664,14 +639,12 @@ async function renderRepos() {
    18. CONTACT
    ──────────────────────────────────────────────────── */
 function buildContact() {
-  // Info card
   const card = document.getElementById('contactInfoCard');
   if (card) {
     const rows = [
       { icon: 'fas fa-envelope', val: CONFIG_PERSONAL.email, href: `mailto:${CONFIG_PERSONAL.email}`, lbl: 'Email' },
       { icon: 'fas fa-globe', val: CONFIG_PERSONAL.website, href: CONFIG_PERSONAL.website, lbl: 'Website' },
-      { icon: 'fab fa-linkedin-in', val: 'shivam-raj', href: 'https://www.linkedin.com/in/shivam-raj-ojha-1680b5284/', lbl: 'LinkedIn' },
-
+      { icon: 'fab fa-linkedin-in', val: 'LinkedIn', href: CONFIG_SOCIALS.find(s => s.label === 'LinkedIn')?.url || '#', lbl: 'LinkedIn' },
     ];
     card.innerHTML = rows.map(r =>
       `<a href="${r.href}" target="_blank" rel="noopener" class="contact-info-row">
@@ -681,11 +654,9 @@ function buildContact() {
     ).join('');
   }
 
-  // Map
   const frame = document.getElementById('mapFrame');
   if (frame && CONFIG_MAP_URL) frame.src = CONFIG_MAP_URL;
 
-  // Form → opens Gmail compose
   const form = document.getElementById('contactForm');
   const btn = document.getElementById('submitBtn');
   if (form && btn) {
@@ -701,14 +672,13 @@ function buildContact() {
       const firstName = name.split(' ')[0];
       const subject = encodeURIComponent(`Connection - ${firstName}`);
       const body = encodeURIComponent(
-        `Hi Shivam ,\n\n${message}\n\n---\nFrom: ${name}\nEmail: ${email}`
+        `Hi Sneha,\n\n${message}\n\n---\nFrom: ${name}\nEmail: ${email}`
       );
       const to = encodeURIComponent(CONFIG_PERSONAL.email);
 
       const gmailUrl = `https://mail.google.com/mail/?view=cm&to=${to}&su=${subject}&body=${body}`;
       window.open(gmailUrl, '_blank', 'noopener');
 
-      // Visual feedback
       const orig = btn.innerHTML;
       btn.innerHTML = '<i class="fas fa-check"></i> Opening Gmail…';
       btn.disabled = true; btn.style.opacity = '.8';
@@ -721,13 +691,12 @@ function buildContact() {
 }
 
 /* ────────────────────────────────────────────────────
-   18b. MOBILE REPO RENDER (for Projects ➔ Repos toggle)
+   18b. MOBILE REPO RENDER
    ──────────────────────────────────────────────────── */
 async function renderReposMobile() {
   const grid = document.getElementById('reposGridMobile');
   if (!grid) return;
 
-  // Check if we should render certifications instead
   if (typeof CONFIG_CERTIFICATIONS !== 'undefined' && CONFIG_CERTIFICATIONS.length > 0) {
     grid.innerHTML = CONFIG_CERTIFICATIONS.map(cert => `
       <article class="certification-card">
@@ -768,7 +737,7 @@ async function renderReposMobile() {
         </div>
       </article>`).join('');
   } catch (_) {
-    const u = CONFIG_GITHUB_USER || 'shivam-raj';
+    const u = CONFIG_GITHUB_USER || 'sneha-bhardwaj';
     grid.innerHTML = `<div style="text-align:center;padding:2rem;color:var(--text-2);">
       <i class="fas fa-triangle-exclamation" style="font-size:1.5rem;color:#ff6b6b;"></i>
       <p style="margin-top:1rem;">Could not load repos.
@@ -778,7 +747,7 @@ async function renderReposMobile() {
 }
 
 /* ────────────────────────────────────────────────────
-   19. TOUCH TILT (mobile gesture)
+   19. TOUCH TILT
    ──────────────────────────────────────────────────── */
 function initTouchTilt() {
   document.querySelectorAll('.tilt-target').forEach(card => {
@@ -800,11 +769,9 @@ function initTouchTilt() {
 /* ────────────────────────────────────────────────────
    20. BOOT
    ──────────────────────────────────────────────────── */
-// Theme initialises synchronously to avoid flash
 initTheme();
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Build dynamic content from config
   buildSidebar();
   buildAbout();
   buildResume();
@@ -813,7 +780,6 @@ document.addEventListener('DOMContentLoaded', () => {
   buildProjectFilters();
   renderProjects();
 
-  // Interactions
   initCanvas();
   initCursor();
   initParallax();
@@ -822,7 +788,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initTilt(document);
   initTouchTilt();
 
-  // Set initial mobile view (About is default)
   if (isMobile()) {
     switchMobileView('about');
   }
