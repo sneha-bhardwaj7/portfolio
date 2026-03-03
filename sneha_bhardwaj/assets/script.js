@@ -192,7 +192,7 @@ function switchMobileView(view) {
 window.switchMobileView = switchMobileView;
 
 /* ────────────────────────────────────────────────────
-   4c. MOBILE PROJECTS SUB-TOGGLE
+   4c. MOBILE PROJECTS SUB-TOGGLE (within Projects section)
    ──────────────────────────────────────────────────── */
 function switchMobileProj(view) {
   document.getElementById('mptProjects')?.classList.toggle('active', view === 'projects');
