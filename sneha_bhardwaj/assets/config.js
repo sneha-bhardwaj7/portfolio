@@ -13,7 +13,7 @@ const CONFIG_PERSONAL = {
     birthday: '16 Jan 2004',
     email: 'snehabhardwaj083@gmail.com',
     phone: '+91 7209547221',
-    website: 'https://portfolio-207.vercel.app/',
+    website: 'https://sneha-portfolio-207.vercel.app/',
     avatar: 'https://github.com/sneha-bhardwaj7.png',
     roles: [
         'Fullstack Developer',
@@ -28,7 +28,7 @@ const CONFIG_SOCIALS = [
     { icon: 'fab fa-github', url: 'https://github.com/sneha-bhardwaj7', label: 'GitHub' },
     { icon: 'fab fa-linkedin-in', url: 'https://www.linkedin.com/in/sneha-bhardwaj-764b38290/', label: 'LinkedIn' },
     { icon: 'fas fa-code', url: 'https://leetcode.com/u/snehabhardwaj083/', label: 'LeetCode' },
-    { icon: 'fas fa-globe', url: 'https://portfolio-207.vercel.app/', label: 'Website' },
+    { icon: 'fas fa-globe', url: 'https://sneha-portfolio-207.vercel.app/', label: 'Website' },
 ];
 
 /* ── Navigation ── */
