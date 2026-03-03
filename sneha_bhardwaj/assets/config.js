@@ -10,7 +10,7 @@ const CONFIG_PERSONAL = {
     name: 'Sneha Bhardwaj',
     tagline: 'Fullstack Developer',
     location: 'Roorkee, India',
-    birthday: '',
+    birthday: '16 Jan 2004',
     email: 'snehabhardwaj083@gmail.com',
     phone: '+91 7209547221',
     website: 'https://portfolio-207.vercel.app/',
@@ -91,6 +91,16 @@ const CONFIG_EDUCATION = [
         title: 'Quantum University, Roorkee',
         body: 'B.Tech (Computer Science) — CGPA: 8.79',
     },
+     {
+        date: 'Higher Education',
+        title: 'Janta College , Surajgarha',
+        body: 'PCM — perc: 74.6%',
+    },
+     {
+        date: 'Schooling',
+        title: 'Sanskar public school',
+        body: '10th Grade — perc: 81.4%',
+    },
 ];
 
 /* ─────────────────────────────
@@ -102,11 +112,7 @@ const CONFIG_EXPERIENCE = [
         title: 'Core Team Member — Google Developer Group (GDG)',
         body: 'Coordinated technical events and workshops, conducted knowledge sessions on full-stack development.',
     },
-    {
-        date: 'May 2025 — Aug 2025',
-        title: 'Backend Developer Intern — Digrows',
-        body: 'Architected backend with Node.js/Express.js, JWT auth, REST APIs, chat systems on WebSocket, and scheduling systems.',
-    },
+    
     {
         date: 'June 2025 — Sept 2025',
         title: 'Software Developer Intern — Swarajya Digital',
@@ -146,34 +152,62 @@ const CONFIG_SKILLS = [
 const CONFIG_PROJECTS = [
     {
         name: 'Smart Pharmacy Management System',
-        cover: null,
-        icon: 'fas fa-pills',
-        category: 'MERN Stack',
-        github: null,
-        demo: null,
+         cover: 'pharma.png',
+        icon: 'fas fa-parking',
+        category: 'Fullstack',
+        demo: 'https://pharma-care-2077.vercel.app/AuthPage',
         description:
             'Full-stack pharmacy management system with role-based access, digital prescriptions, stock alerts, and AI-powered medicine chatbot.',
     },
     {
         name: 'AI-Powered Secure Outpass Approval System',
-        cover: null,
-        icon: 'fas fa-lock',
-        category: 'Full Stack',
-        github: null,
-        demo: null,
+         cover: 'outpass.png',
+        icon: 'fas fa-parking',
+        category: 'Fullstack',
+        github: 'https://github.com/sneha-bhardwaj7/AiPass',
+        demo: '',
         description:
             'Automated parent approval system using AI and OTP authentication with secure notifications via WhatsApp and email.',
     },
+    {
+        name: 'Employee Women ',
+        cover: 'EmployeeWomen.png',
+        icon: 'fas fa-rocket',
+        category: 'Frontend',
+        github: 'https://github.com/sneha-bhardwaj7/HackIndia-Spark-9-2025-ignite',
+        demo: null,
+        description: 'A responsive web application designed to empower and support women in the workplace. It provides resources, networking opportunities, and a supportive community to help women.',
+    }, 
+
+    {
+        name: 'Pet Care ',
+        cover: 'petCare.png',
+        icon: 'fas fa-rocket',
+        category: 'Mernstack',
+        github: 'https://github.com/sneha-bhardwaj7/pet_care',
+        demo: null,
+        description: 'A full-stack pet care management system with features for pet profiles, appointment scheduling, and veterinary records.',
+    }, 
 ];
 
 /* ─────────────────────────────
    CERTIFICATIONS
    ───────────────────────────── */
 const CONFIG_CERTIFICATIONS = [
+
+    {
+        title: 'internship at Swarajya Digital',
+        issuer: 'Swarajya Digital',
+        image: 'InternshipCertificateSneha.jpg',
+        url: 'https://www.swarajyadigital.com/',
+        description:
+            'Completed a 3-month internship at Swarajya Digital, gaining hands-on experience in web development and digital marketing.',
+    },
+
     {
         title: 'Postman API Fundamentals',
         issuer: 'Postman',
-        image: 'postman.png',
+        image: 'postmanSnehaCertificate.jpg',
         url: 'https://www.postman.com/',
         description:
             'Hands-on experience in REST API testing, automation workflows, and environment handling using Postman.',
@@ -181,11 +215,28 @@ const CONFIG_CERTIFICATIONS = [
     {
         title: 'Generative AI Study Jams',
         issuer: 'Google Developer Groups, Quantum University',
-        image: 'genai.png',
+        image: 'SnehaAi.jpg',
         url: 'https://www.google.com/',
         description:
             'Earned 15+ skill badges on GenAI labs, gaining practical exposure to generative AI tools and applications.',
     },
+
+    {
+        title:'core team member of google developer group',
+        issuer:'Google Developer Group, Quantum University',
+        image:'Coreteam.jpg',
+        url:'https://www.google.com/',
+        description:'As a core team member of GDG Quantum University, I have organized and led multiple technical events and workshops, fostering a vibrant developer community on campus.',
+    },
+    
+    {
+        title:'COding Ninjas Workshop',
+        issuer:'Coding Ninjas',
+        image:'CodingNinjas.jpg',
+        url:'https://www.codingninjas.com/',
+        description:'Participated in a hands-on workshop on full-stack development, gaining practical experience in building web applications using modern technologies.',
+    }
+
 ];
 
 /* ── GitHub username ── */
