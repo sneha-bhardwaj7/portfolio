@@ -28,7 +28,7 @@ const CONFIG_SOCIALS = [
     { icon: 'fab fa-github', url: 'https://github.com/sneha-bhardwaj7', label: 'GitHub' },
     { icon: 'fab fa-linkedin-in', url: 'https://www.linkedin.com/in/sneha-bhardwaj-764b38290/', label: 'LinkedIn' },
     { icon: 'fas fa-code', url: 'https://leetcode.com/u/snehab07/', label: 'LeetCode' },
-    { icon: 'fas fa-globe', url: 'https://sneha-bhardwaj.vercel.app/', label: 'Website' },
+    { icon: 'fas fa-globe', url: 'https://pharma-care-2077.vercel.app/AuthPage', label: 'Website' },
 ];
 
 /* ── Navigation ── */
@@ -89,7 +89,7 @@ const CONFIG_EDUCATION = [
     {
         date: '2023 — 2027',
         title: 'Quantum University, Roorkee',
-        body: 'B.Tech (Computer Science) — CGPA: 8.79',
+        body: 'B.Tech (Computer Science) — CGPA: 8.93',
     },
      {
         date: 'Higher Education',
@@ -165,7 +165,7 @@ const CONFIG_PROJECTS = [
         icon: 'fas fa-parking',
         category: 'Fullstack',
         github: 'https://github.com/sneha-bhardwaj7/AiPass',
-        demo: '',
+        demo: 'https://passify-ai-eight.vercel.app/',
         description:
             'Automated parent approval system using AI and OTP authentication with secure notifications via WhatsApp and email.',
     },
@@ -203,6 +203,16 @@ const CONFIG_CERTIFICATIONS = [
         description:
             'Completed a 3-month internship at Swarajya Digital, gaining hands-on experience in web development and digital marketing.',
     },
+
+    {
+        title: 'internship at IBM',
+        issuer: 'IBM SkillsBuild',
+        image: 'ibmSnehaCertificate.jpg',
+        url: 'https://www.ibm.com/in-en',
+        description:
+        'Completed the 1M1B AI + Sustainability Virtual Internship through IBM SkillsBuild, gaining exposure to AI applications and sustainability-focused technology.',
+    },
+
 
     {
         title: 'Postman API Fundamentals',
